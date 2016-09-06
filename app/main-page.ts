@@ -9,7 +9,7 @@ var oLangWebViewInterface;
 
 export function pageLoaded(args){
     page = <Page>args.object;
-    page.bindingContext = webViewInterfaceDemoVM; 
+    page.bindingContext = webViewInterfaceDemoVM;
 }
 
 /**
@@ -20,11 +20,11 @@ export function navigatedTo(args){
 }
 
 /**
- * Clearing resource attached with webviewInterface on navigated from 
+ * Clearing resource attached with webviewInterface on navigated from
  * this page to avoid memory leak.
  */
 export function navigatedFrom(){
-     oLangWebViewInterface.destroy();   
+     oLangWebViewInterface.destroy();
 }
 
 /**
@@ -45,16 +45,16 @@ function setupWebViewInterface(page: Page){
 }
 
 /**
- * Sends intial list of languages to webView, once it is loaded 
+ * Sends intial list of languages to webView, once it is loaded
  */
 function loadLanguagesInWebView(){
-    oLangWebViewInterface.emit('loadLanguages', webViewInterfaceDemoVM.lstLanguages);
+    oLangWebViewInterface.emit('loadLanguages', JSON.stringify(webViewInterfaceDemoVM.lstLanguages));
 }
 
 /**
  * Handles any event/command emitted by language webview.
  */
-function listenLangWebViewEvents(){  
+function listenLangWebViewEvents(){
     // handles language selectionChange event.
     oLangWebViewInterface.on('languageSelection', (selectedLanguage) => {
         webViewInterfaceDemoVM.selectedLanguage = selectedLanguage;
@@ -65,6 +65,9 @@ function listenLangWebViewEvents(){
  * Adds language to webView dropdown
  */
 export function addLanguage(){
+    // with this line, whenever you click on add language, the error will happen
+    oLangWebViewInterface.emit('loadLanguages', JSON.stringify(webViewInterfaceDemoVM.lstLanguages));
+
     var txtField = <TextField>page.getViewById('txtLanguage');
     oLangWebViewInterface.callJSFunction('addNewLanguage', [txtField.text]);
 }
@@ -85,5 +88,5 @@ export function getSelectedLanguage(){
 export function getSelectedLanguageDeferred(){
    oLangWebViewInterface.callJSFunction('getSelectedLanguageDeferred', null, (oSelectedLang) => {
         alert(`Deferred Selected Language is ${oSelectedLang.text}`);
-    });     
+    });
 }
