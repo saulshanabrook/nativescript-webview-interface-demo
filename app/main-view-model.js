@@ -1,16 +1,17 @@
 "use strict";
-var observable_1 = require('data/observable');
+var observable_1 = require("data/observable");
 /**
  * View Model for the webViewInterfaceDemo.
  */
 var WebViewInterfaceDemoVM = (function (_super) {
     __extends(WebViewInterfaceDemoVM, _super);
     function WebViewInterfaceDemoVM() {
-        _super.call(this);
+        var _this = _super.call(this) || this;
         /**
          * Default languages to load in dropdown.
          */
-        this.lstLanguages = ['English', 'Sanskrit', 'French'];
+        _this.lstLanguages = ['English', 'Sanskrit', 'French', "HEY"];
+        return _this;
     }
     Object.defineProperty(WebViewInterfaceDemoVM.prototype, "language", {
         get: function () {
