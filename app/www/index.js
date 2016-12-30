@@ -7,7 +7,7 @@
      */
     function addNativeMsgListener() {
         oWebViewInterface.on('loadLanguages', function (arrLanguagesStr) {
-            var arrLanguages = JSON.parse(arrLanguagesStr);
+            var arrLanguages = decodeURIComponent(JSON.parse(arrLanguagesStr));
             for (var i = 0; i < arrLanguages.length; i++) {
                 addLanguageOption(arrLanguages[i]);
             }

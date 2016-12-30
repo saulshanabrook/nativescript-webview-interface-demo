@@ -48,7 +48,7 @@ function setupWebViewInterface(page: Page){
  * Sends intial list of languages to webView, once it is loaded
  */
 function loadLanguagesInWebView(){
-    oLangWebViewInterface.emit('loadLanguages', JSON.stringify(webViewInterfaceDemoVM.lstLanguages));
+    oLangWebViewInterface.emit('loadLanguages', encodeURIComponent(JSON.stringify(webViewInterfaceDemoVM.lstLanguages)));
 }
 
 /**
